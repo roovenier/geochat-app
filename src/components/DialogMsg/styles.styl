@@ -1,0 +1,37 @@
+@import '../breakpoints'
+
+.item
+	margin-bottom 30px
+	display flex
+	width 70%
+
+	@media (max-width: $md-screen)
+		margin-bottom 20px
+
+	@media (max-width: $sm-screen)
+		width 100%
+
+	&:last-child
+		margin-bottom 0
+
+.avatar
+	margin-right 10px
+	flex 0 0 26px
+	width 26px
+	height 26px
+	background-color #0C5DA3
+	border-radius 5px
+
+.date
+	margin 0 0 3px
+	font-size 12px
+	color #8a8a8a
+
+	@media (max-width: $sm-screen)
+		margin-bottom 1px
+
+.text
+	margin 0
+	font-size 14px
+	line-height 23px
+	white-space pre-line

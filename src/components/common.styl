@@ -1,0 +1,28 @@
+@import './breakpoints'
+
+*
+	font-family 'Roboto', Arial, sans-serif
+
+html, body
+	height 100%
+
+.wrapper
+	display flex
+	flex-direction column
+	height 100%
+
+.container
+	margin 0 auto
+	padding 0 10px
+	width 940px
+	overflow hidden
+
+	@media (max-width: $lg-screen)
+		padding 0
+		width 100%
+
+.containerFlex
+	@extends .container
+	display flex
+	flex-direction column
+	flex 1

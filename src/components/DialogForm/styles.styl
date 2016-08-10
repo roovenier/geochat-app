@@ -1,0 +1,68 @@
+@import '../breakpoints'
+
+.form
+	margin-bottom 25px
+	display flex
+	flex-direction column
+	justify-content flex-end
+	flex 150px 0 0
+
+	@media (max-width: $md-screen)
+		margin-bottom 20px
+		flex-direction row
+		flex none
+
+	@media (max-width: $sm-screen)
+		margin 0
+
+.msgField
+	margin-bottom 15px
+	padding 15px 20px
+	width 70%
+	height 70px
+	line-height 23px
+	font-size 14px
+	color #000
+	outline 0
+	border 1px solid #c8c8c8
+	border-radius 4px
+	overflow auto
+
+	@media (max-width: $md-screen)
+		margin-bottom 0
+		padding 5px 10px
+		flex 1
+		height auto
+		border-radius 8px 0 0 8px
+
+	@media (max-width: $sm-screen)
+		border-radius 0
+
+	&:empty:before
+		content "Type something..."
+		color #c8c8c8
+
+.send
+	width 128px
+	height 35px
+	font-size 17px
+	text-transform uppercase
+	color #fff
+	background-color #1d8824
+	border-radius 8px
+	border 0
+	outline 0
+	cursor pointer
+	transition .2s all
+
+	@media (max-width: $md-screen)
+		flex 128px 0 0
+		border-radius 0 8px 8px 0
+
+	@media (max-width: $sm-screen)
+		flex 80px 0 0
+		width 80px
+		border-radius 0
+
+	&:hover
+		background-color #38AD40
