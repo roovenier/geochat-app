@@ -18,10 +18,11 @@ export default class ClientsList extends Component {
 					<Text style={styles.title}>Current users near you:</Text>
 
 					{clients.length > 0 ? (
-						<ScrollView>
+						<ScrollView automaticallyAdjustContentInsets={false}>
 							<ListView
+								automaticallyAdjustContentInsets={false}
 								dataSource={clientsRows}
-								renderRow={item => <ClientItem key={item.id} item={item} clientMe={clientMe} notifications={notifications} />}
+								renderRow={item => <ClientItem key={item.id} item={item} clientMe={clientMe} notifications={notifications} openDialog={id => this.props.openDialog(id)} />}
 							/>
 						</ScrollView>
 					) : <Text style={styles.nobody}>Nobody&#39;s here :(</Text>}

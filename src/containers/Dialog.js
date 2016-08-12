@@ -9,7 +9,7 @@ class Dialog extends Component {
 	render() {
 		const { clientMe, clients } = this.props.clients;
 
-		const interlocutor = clients.filter(item => item.id === this.props.params.clientId)[0] || null;
+		const interlocutor = clients.filter(item => item.id === this.props.interlocutorId)[0] || null;
 
 		return (
 			<DialogPage
@@ -29,11 +29,11 @@ class Dialog extends Component {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(removeNotification(this.props.clients.clientMe.id, this.props.params.clientId));
+		this.props.dispatch(removeNotification(this.props.clients.clientMe.id, this.props.interlocutorId));
 	}
 
 	componentDidUpdate() {
-		this.props.dispatch(removeNotification(this.props.clients.clientMe.id, this.props.params.clientId));
+		this.props.dispatch(removeNotification(this.props.clients.clientMe.id, this.props.interlocutorId));
 	}
 
 	sendMessage(text) {
@@ -43,9 +43,9 @@ class Dialog extends Component {
 			date: Math.floor(Date.now() / 1000),
 			text
 		}
-		this.props.dispatch(addMessage(this.props.params.clientId, messageObj));
-		this.props.socket.emit('adding message', {recipient: this.props.params.clientId, sender: this.props.clients.clientMe.id, message: messageObj});
-		this.props.socket.emit('adding notification', {recipient: this.props.params.clientId, sender: this.props.clients.clientMe.id});
+		this.props.dispatch(addMessage(this.props.interlocutorId, messageObj));
+		this.props.socket.emit('adding message', {recipient: this.props.interlocutorId, sender: this.props.clients.clientMe.id, message: messageObj});
+		this.props.socket.emit('adding notification', {recipient: this.props.interlocutorId, sender: this.props.clients.clientMe.id});
 	}
 }
 

@@ -4,7 +4,7 @@ const styles = {
 	},
 	client: {
 		flexDirection: 'row',
-		padding: 12
+		padding: 15
 	},
 	avatar: {
 		marginRight: 20,

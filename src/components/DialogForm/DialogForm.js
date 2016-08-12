@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
-import { stripHTML } from '../../helpers';
-import styles from './styles.styl';
+import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import stylesObj from './styles';
+const styles = StyleSheet.create(stylesObj);
 
 export default class DialogForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { message: '' };
+	}
+
 	render() {
 		return (
-			<div className={styles.form}>
-				<div className={styles.msgField} contentEditable="true" ref="msgField" onKeyDown={e => this.keyDown(e)}></div>
+			<View style={styles.form}>
+				<TextInput
+					multiline={true}
+					autoFocus={true}
+					placeholder={'Type something...'}
+					value={this.state.message}
+					ref="input"
+					style={styles.input}
+					onChangeText={message => this.setState({message})}
+				/>
 
-				<button className={styles.send} onClick={e => this.sendMessage(this.refs.msgField.innerHTML)}>Send</button>
-			</div>
+				<TouchableHighlight
+					style={styles.button}
+					underlayColor={'#38ad40'}
+					onPress={e => this.sendMessage()}>
+					<Text style={styles.buttonText}>SEND</Text>
+				</TouchableHighlight>
+			</View>
 		);
 	}
 
-	keyDown(e) {
-		if(e.keyCode === 13 && !e.shiftKey) {
-			e.preventDefault();
-			this.sendMessage(this.refs.msgField.innerHTML);
-		}
-	}
-
-	sendMessage(text) {
-		text = stripHTML(text).trim();
-
-		if(text.length > 0) {
-			this.props.sendMessage(text);
-			this.refs.msgField.innerHTML = '';
+	sendMessage() {
+		if(this.state.message.trim()) {
+			this.refs.input.clear(0);
+			this.setState({message: ''});
+			this.props.sendMessage(this.state.message.trim());
 		}
 	}
 }

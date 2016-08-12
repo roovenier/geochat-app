@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 import stylesObj from './styles';
 
 export default class ClientItem extends Component {
@@ -14,7 +14,7 @@ export default class ClientItem extends Component {
 		const styles = StyleSheet.create(stylesMW);
 
 		return (
-			<View style={styles.item}>
+			<TouchableHighlight style={styles.item} underlayColor='#eee' onPress={e => this.props.openDialog(item.id)}>
 				<View style={styles.client}>
 					<View style={styles.avatar} />
 
@@ -34,7 +34,7 @@ export default class ClientItem extends Component {
 						</View>
 					</View>
 				</View>
-			</View>
+			</TouchableHighlight>
 		);
 	}
 }

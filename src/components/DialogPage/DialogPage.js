@@ -1,70 +1,68 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import common from '../common.styl';
-import styles from './styles.styl';
+import { StyleSheet, View, Text, ScrollView, ListView } from 'react-native';
+import stylesObj from './styles';
+const styles = StyleSheet.create(stylesObj);
+
 import Interlocutor from '../Interlocutor/Interlocutor';
 import DialogMsg from '../DialogMsg/DialogMsg';
 import DialogForm from '../DialogForm/DialogForm';
 
-import $ from 'jquery';
-import 'jquery-mousewheel';
-import 'malihu-custom-scrollbar-plugin';
-import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
-
 export default class DialogPage extends Component {
+	constructor(props) {
+		super(props);
+		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		this.messagesRows = null;
+		this.state = { svHeight: 0 };
+	}
+
 	render() {
 		const { interlocutor, clientMe, messages } = this.props;
 
+		if(interlocutor && messages[interlocutor.id]) {
+			this.messagesRows = this.ds.cloneWithRows(messages[interlocutor.id]);
+		}
+
 		return (
-			<div className={common.containerFlex}>
+			<View style={styles.container}>
 				{interlocutor !== null ? (
-					<div className={styles.dialog}>
-						<div>
-							<Link className={styles.back} to='/'>Back</Link>
+					<View style={styles.dialog}>
+						<Interlocutor interlocutor={interlocutor} />
 
-							<Interlocutor interlocutor={interlocutor} />
-						</div>
+						<View style={styles.content}>
+							<ScrollView
+								automaticallyAdjustContentInsets={false}
+								ref="scrollview"
+								onLayout={event => {
+									this.setState({svHeight: event.nativeEvent.layout.height});
+								}}
+								onContentSizeChange={(contentWidth, contentHeight) => {
+									this.scrollBottom(contentHeight);
+								}}>
+								{this.messagesRows ? (
+									<ListView
+  										automaticallyAdjustContentInsets={false}
+										dataSource={this.messagesRows}
+										renderRow={item => {
+											const date = new Date(item.date * 1000);
+											const client = (item.sender === interlocutor.id) ? interlocutor : clientMe;
 
-						<div className={styles.messages} ref="messages">
-							<div>
-								{messages[interlocutor.id] && messages[interlocutor.id].map(item => {
-									const date = new Date(item.date * 1000);
-									const client = (item.sender === interlocutor.id) ? interlocutor : clientMe;
+											return <DialogMsg key={item.id} date={date} item={item} client={client} />;
+										}}
+									/>
+								) : null}
+							</ScrollView>
 
-									return <DialogMsg key={item.id} date={date} item={item} client={client} />;
-								})}
-							</div>
-						</div>
-
-						<DialogForm keyDown={e => this.keyDown(e)} sendMessage={text => this.props.sendMessage(text)} />
-					</div>
-				) : (
-					<div className={styles.dialog}>
-						<p className={styles.disconnected}>
-							Your interlocutor has disconnected. Please <Link className={styles.return} to='/'>go back</Link>
-						</p>
-					</div>
-				)}
-			</div>
+							<DialogForm sendMessage={text => this.props.sendMessage(text)} />
+						</View>
+					</View>
+				) : <Text style={styles.disconnected}>Your interlocutor has disconnected. Please go back</Text>}
+			</View>
 		);
 	}
 
-	componentDidMount() {
-		this.setScrollbar();
-	}
-
-	componentDidUpdate() {
-		this.setScrollbar();
-	}
-
-	setScrollbar() {
-		$(this.refs.messages).mCustomScrollbar({
-			theme: 'dark',
-			keyboard: { enable: false }
-		});
-
-		$(this.refs.messages).mCustomScrollbar("scrollTo", 'bottom', {
-			scrollInertia: 300
-		});
+	scrollBottom(scrollToBottomY) {
+		if(scrollToBottomY > this.state.svHeight && this.state.svHeight !== 0) {
+			this.refs.scrollview.scrollTo({y: scrollToBottomY - this.state.svHeight, animated: false});
+		}
 	}
 }

@@ -20,6 +20,7 @@ export default class IndexPage extends Component {
 					clients={clients}
 					clientMe={clientMe}
 					notifications={notifications}
+					openDialog={id => this.props.openDialog(id)}
 				/>
 			</View>
 		);

@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import styles from './styles.styl';
+import { StyleSheet, View, Text } from 'react-native';
+import stylesObj from './styles';
 
 export default class DialogMsg extends Component {
 	render() {
 		const { item, client, date } = this.props;
 
+		const stylesMW = Object.assign({}, stylesObj, {
+			avatar: Object.assign({}, stylesObj.avatar, {backgroundColor: client.colors.hex})
+		});
+		const styles = StyleSheet.create(stylesMW);
+
 		return (
-			<div className={styles.item}>
-				<div className={styles.avatar} style={{backgroundColor: client.colors.hex}}></div>
+			<View style={styles.item}>
+				<View style={styles.avatar} />
 
-				<div className={styles.message}>
-					<p className={styles.date}>{date.getHours()}:{date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}</p>
+				<View style={styles.message}>
+					<Text style={styles.date}>{date.getHours()}:{date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}</Text>
 
-					<p className={styles.text}>{item.text}</p>
-				</div>
-			</div>
+					<Text style={styles.text}>{item.text}</Text>
+				</View>
+			</View>
 		);
 	}
 }

@@ -1,7 +1,6 @@
 const styles = {
 	container: {
-		flex: 1,
-		marginBottom: 12
+		flex: 1
 	},
 	clients: {
 		flex: 1
