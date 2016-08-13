@@ -2,6 +2,8 @@ const styles = {
 	profile: {
 		marginTop: 90,
 		marginBottom: 25,
+		marginLeft: 15,
+		marginRight: 15,
 		paddingTop: 0,
 		alignItems: 'center'
 	},

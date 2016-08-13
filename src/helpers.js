@@ -28,10 +28,3 @@ export function pickRandomProperty(obj) {
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-export function stripHTML(html) {
-	html = html.replace(/<br\s*[\/]?>/gi, "\n");
-	var tmp = document.createElement("DIV");
-	tmp.innerHTML = html;
-	return tmp.textContent || tmp.innerText || "";
-}

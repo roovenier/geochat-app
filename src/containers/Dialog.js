@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DialogPage from '../components/DialogPage/DialogPage';
 import { addMessage } from '../actions/messages';
 import { removeNotification } from '../actions/notifications';
-import { getDistance, guidGenerator } from '../helpers';
+import { guidGenerator } from '../helpers';
 
 class Dialog extends Component {
 	render() {

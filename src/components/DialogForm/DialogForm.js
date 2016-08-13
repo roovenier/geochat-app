@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+
 import stylesObj from './styles';
 const styles = StyleSheet.create(stylesObj);
 
@@ -34,9 +35,9 @@ export default class DialogForm extends Component {
 
 	sendMessage() {
 		if(this.state.message.trim()) {
+			this.props.sendMessage(this.state.message.trim());
 			this.refs.input.clear(0);
 			this.setState({message: ''});
-			this.props.sendMessage(this.state.message.trim());
 		}
 	}
 }

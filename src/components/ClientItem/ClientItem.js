@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
+
 import stylesObj from './styles';
 
 export default class ClientItem extends Component {

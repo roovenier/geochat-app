@@ -6,21 +6,11 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "https": "^1.0.0",
     "react": "15.2.1",
     "react-native": "0.31.0",
-    "react-native-redux-router": "^1.0.7",
-    "react-native-router-flux": "^3.33.2",
     "react-redux": "^4.4.5",
-    "react-router": "^2.6.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "socket.io-client": "^1.4.8"
-  },
-  "devDependencies": {
-    "file-loader": "^0.9.0",
-    "react-native-css-loader": "^1.0.2",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^2.1.2"
   }
 }

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+
 import stylesObj from './styles';
 
 export default class Profile extends Component {
 	render() {
 		const { clientMe } = this.props;
 
-		stylesObj.avatar.backgroundColor = clientMe.colors.hex;
-		stylesObj.name.color = clientMe.colors.hex;
-		const styles = StyleSheet.create(stylesObj);
+		const stylesMW = Object.assign({}, stylesObj, {
+			avatar: Object.assign({}, stylesObj.avatar, {backgroundColor: clientMe.colors.hex}),
+			name: Object.assign({}, stylesObj.name, {color: clientMe.colors.hex})
+		});
+		const styles = StyleSheet.create(stylesMW);
 
 		return (
 			<View style={styles.profile}>
@@ -27,7 +30,7 @@ export default class Profile extends Component {
 				<Text style={styles.prop}>
 					<Text>Your geoposition: </Text>
 
-					<Text style={styles.value}>{clientMe.coords.latitude},{'\n'} {clientMe.coords.longitude}</Text>
+					<Text style={styles.value}>{clientMe.coords.latitude}, {clientMe.coords.longitude}</Text>
 				</Text>
 			</View>
 		);

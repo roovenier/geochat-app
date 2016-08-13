@@ -2,23 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigatorIOS } from 'react-native';
 import io from 'socket.io-client/socket.io';
-//import { Router, routerReducer, Route, Container, Animations, Schema } from 'react-native-redux-router';
-//import {Scene, Router} from 'react-native-router-flux';
-//import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-//import { Promise } from 'es6-promise';
-//import 'normalize.css';
 
 import csscolors from '../colors.json';
-import { getCoords, pickRandomProperty } from '../helpers';
+import { getCoords, pickRandomProperty, capitalizeFirstLetter } from '../helpers';
 import { setClientMe, setClients } from '../actions/clients';
 import { addMessage } from '../actions/messages';
 import { addNotification } from '../actions/notifications';
 import { setSocket } from '../actions/socket';
 
-//import styles from '../components/common.styl';
-// import Header from '../components/Header/Header';
-//import Profile from '../components/Profile/Profile';
-//import MainPage from '../components/MainPage/MainPage';
 import Index from './Index';
 import Loading from '../components/Loading/Loading';
 
@@ -56,11 +47,10 @@ class App extends Component {
 			new Promise((resolve, reject) => {
 				const colorName = pickRandomProperty(csscolors);
 				const colorHex = csscolors[colorName];
-				resolve({colorName, colorHex});
+				resolve({colorName: capitalizeFirstLetter(colorName), colorHex});
 			})
 		, getCoords])
 			.then(values => {
-				values[1] = {latitude: 56.761757, longitude: 54.150153};
 				this.socket.emit('setting client metadata', {colors: values[0], coords: values[1]});
 			})
 			.catch(error => {
@@ -74,14 +64,14 @@ class App extends Component {
 
 		if(clientMe.coords && clientMe.colors && Object.keys(this.props.socket).length !== 0) {
 			return (
-		      <NavigatorIOS
-		        initialRoute={{
-		          title: 'Geochat',
-		          component: Index
-		        }}
-				style={{flex: 1}}
-		      />
-		    );
+				<NavigatorIOS
+					initialRoute={{
+						title: 'Geochat',
+						component: Index
+					}}
+					style={{flex: 1}}
+				/>
+			);
 		} else {
 			return <Loading />;
 		}
