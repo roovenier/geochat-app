@@ -12,7 +12,8 @@ const styles = {
 		height: 40,
 		fontSize: 14,
 		borderColor: '#8a8a8a',
-		borderTopWidth: 1
+		borderTopWidth: 1,
+		backgroundColor: '#fff'
 	},
 	button: {
 		alignItems: 'center',

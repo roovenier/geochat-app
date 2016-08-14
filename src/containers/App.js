@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigatorIOS } from 'react-native';
-import io from 'socket.io-client/socket.io';
+//import io from 'socket.io-client/socket.io';
 
 import csscolors from '../colors.json';
 import { getCoords, pickRandomProperty, capitalizeFirstLetter } from '../helpers';
@@ -17,6 +17,12 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
+		if (window.navigator && Object.keys(window.navigator).length == 0) {
+			window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
+		}
+		//window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
+
+		const io = require('socket.io-client/socket.io');
 		this.socket = io('https://boiling-caverns-63422.herokuapp.com', {
 			transports: ['websocket']
 		});
@@ -51,6 +57,7 @@ class App extends Component {
 			})
 		, getCoords])
 			.then(values => {
+				values[1] = {latitude: 56.761757, longitude: 54.150153};
 				this.socket.emit('setting client metadata', {colors: values[0], coords: values[1]});
 			})
 			.catch(error => {

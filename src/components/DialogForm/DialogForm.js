@@ -15,7 +15,6 @@ export default class DialogForm extends Component {
 			<View style={styles.form}>
 				<TextInput
 					multiline={true}
-					autoFocus={true}
 					placeholder={'Type something...'}
 					value={this.state.message}
 					ref="input"
