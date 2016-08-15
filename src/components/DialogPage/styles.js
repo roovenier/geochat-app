@@ -1,6 +1,6 @@
 const styles = {
 	container: {
-		marginTop: 90,
+		marginTop: 85,
 		flex: 1
 	},
 	dialog: {

@@ -2,7 +2,7 @@ const styles = {
 	interlocutor: {
 		marginLeft: 15,
 		marginRight: 15,
-		paddingBottom: 15,
+		paddingBottom: 10,
 		flexDirection: 'row',
 		borderBottomWidth: 1,
 		borderBottomColor: 'rgba(0, 0, 0, 0.20)'
@@ -15,12 +15,13 @@ const styles = {
 	},
 	title: {
 		marginBottom: 3,
+		fontSize: 12
 	},
 	name: {
 		backgroundColor: '#000'
 	},
 	distance: {
-		fontSize: 13,
+		fontSize: 11,
 		color: '#8a8a8a'
 	}
 };

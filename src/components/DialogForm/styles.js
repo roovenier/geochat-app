@@ -9,8 +9,8 @@ const styles = {
 		paddingLeft: 10,
 		paddingRight: 10,
 		flex: 1,
-		height: 40,
-		fontSize: 14,
+		height: 35,
+		fontSize: 12,
 		borderColor: '#8a8a8a',
 		borderTopWidth: 1,
 		backgroundColor: '#fff'
@@ -23,7 +23,7 @@ const styles = {
 	buttonText: {
 		paddingLeft: 15,
 		paddingRight: 15,
-		fontSize: 17,
+		fontSize: 13,
 		fontWeight: 'bold',
 		color: '#fff'
 	}

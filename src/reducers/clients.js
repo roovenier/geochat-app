@@ -8,7 +8,7 @@ const defaultState = {
 export default function clients(state = defaultState, action) {
 	switch (action.type) {
 		case SET_CLIENTS:
-			return { ...state, clients: [...action.clients] }
+			return { ...state, clients: [...action.clients].reverse() }
 		case SET_CLIENT_ME:
 			return { ...state, clientMe: action.clientMe }
 		default:

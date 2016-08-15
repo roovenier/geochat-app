@@ -14,7 +14,6 @@ export default class DialogPage extends Component {
 		super(props);
 		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.messagesRows = null;
-		this.state = { svHeight: 0, scrollToBottomY: 0 };
 	}
 
 	render() {
@@ -33,14 +32,7 @@ export default class DialogPage extends Component {
 						<View style={styles.content}>
 							<ScrollView
 								automaticallyAdjustContentInsets={false}
-								ref="scrollview"
-								onLayout={event => {
-									this.setState({svHeight: event.nativeEvent.layout.height});
-								}}
-								onContentSizeChange={(contentWidth, contentHeight) => {
-									this.setState({scrollToBottomY: contentHeight});
-									this.scrollBottom(contentHeight);
-								}}>
+								ref="scrollview">
 								{this.messagesRows ? (
 									<ListView
   										automaticallyAdjustContentInsets={false}
@@ -55,9 +47,9 @@ export default class DialogPage extends Component {
 								) : null}
 							</ScrollView>
 
-							<DialogForm sendMessage={text => this.props.sendMessage(text)} moveForm={yValue => this.moveForm(yValue)} />
+							<DialogForm sendMessage={text => this.props.sendMessage(text)} />
 
-							<KeyboardSpacer onToggle={(f, s) => this.test(f, s)} />
+							<KeyboardSpacer />
 						</View>
 					</View>
 				) : <Text style={styles.disconnected}>Your interlocutor has disconnected. Please go back</Text>}
@@ -65,28 +57,9 @@ export default class DialogPage extends Component {
 		);
 	}
 
-	test(f, s) {
-		//this.aaa = null;
-		if(!f) {
-			// console.log(this.state.scrollToBottomY);
-			// this.scrollBottom(this.state.scrollToBottomY);
-			//this.setState({lastScroll: 'sdsd'});
-			//this.forceUpdate();
-			// console.log(this.state.lastScroll);
-			console.log(this.aaa);
-			console.log(this.state.lastScroll);
-			if(this.aaa !== this.state.lastScroll) {
-				this.refs.scrollview.scrollTo({y: this.state.lastScroll - 255, animated: false});
-			}
-		} else {
-			this.aaa = this.state.lastScroll;
-		}
-	}
-
-	scrollBottom(scrollToBottomY) {
-		if(scrollToBottomY > this.state.svHeight && this.state.svHeight !== 0) {
-			this.setState({lastScroll: scrollToBottomY - this.state.svHeight});
-			this.refs.scrollview.scrollTo({y: scrollToBottomY - this.state.svHeight, animated: false});
+	componentDidUpdate() {
+		if(this.refs.scrollview) {
+			this.refs.scrollview.scrollTo({y: 0, animated: false});
 		}
 	}
 }

@@ -7,11 +7,11 @@ const styles = {
 	},
 	title: {
 		marginBottom: 10,
-		fontSize: 20,
+		fontSize: 14,
 		textAlign: 'center'
 	},
 	nobody: {
-		fontSize: 16,
+		fontSize: 12,
 		color: '#8a8a8a',
 		textAlign: 'center'
 	}

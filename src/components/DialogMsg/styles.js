@@ -15,9 +15,12 @@ const styles = {
 		flexWrap: 'wrap'
 	},
 	date: {
-		marginBottom: 4,
-		fontSize: 12,
+		marginBottom: 3,
+		fontSize: 11,
 		color: '#8a8a8a'
+	},
+	text: {
+		fontSize: 12
 	}
 };
 
