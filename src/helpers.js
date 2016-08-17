@@ -1,11 +1,10 @@
-//import { Promise } from 'es6-promise';
-
 export const getCoords = new Promise((resolve, reject) => {
 	navigator.geolocation.getCurrentPosition(position => {
 		const { latitude, longitude } = position.coords;
 		resolve({latitude, longitude});
 	}, error => {
-		reject(error.message);
+		const err = error.message || error;
+		reject(err);
 	});
 });
 

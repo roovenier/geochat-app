@@ -3,6 +3,11 @@ const styles = {
 		flexDirection: 'row',
 		justifyContent: 'flex-end'
 	},
+	inputWrap: {
+		flex: 1,
+		borderTopWidth: 1,
+		borderColor: '#8a8a8a'
+	},
 	input: {
 		paddingTop: 6,
 		paddingBottom: 6,
@@ -16,13 +21,13 @@ const styles = {
 		backgroundColor: '#fff'
 	},
 	button: {
+		paddingLeft: 15,
+		paddingRight: 15,
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#1d8824'
 	},
 	buttonText: {
-		paddingLeft: 15,
-		paddingRight: 15,
 		fontSize: 13,
 		fontWeight: 'bold',
 		color: '#fff'

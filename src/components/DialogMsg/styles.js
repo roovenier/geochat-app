@@ -20,7 +20,8 @@ const styles = {
 		color: '#8a8a8a'
 	},
 	text: {
-		fontSize: 12
+		fontSize: 12,
+		color: '#000'
 	}
 };
 

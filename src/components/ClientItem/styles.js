@@ -1,7 +1,4 @@
 const styles = {
-	item: {
-		//backgroundColor: 'grey'
-	},
 	client: {
 		flexDirection: 'row',
 		padding: 15
@@ -52,7 +49,8 @@ const styles = {
 		height: 12
 	},
 	value: {
-		fontSize: 11
+		fontSize: 11,
+		color: '#000'
 	}
 };
 

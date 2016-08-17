@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, ListView } from 'react-native';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import stylesObj from './styles';
 const styles = StyleSheet.create(stylesObj);
@@ -48,8 +47,6 @@ export default class DialogPage extends Component {
 							</ScrollView>
 
 							<DialogForm sendMessage={text => this.props.sendMessage(text)} />
-
-							<KeyboardSpacer />
 						</View>
 					</View>
 				) : <Text style={styles.disconnected}>Your interlocutor has disconnected. Please go back</Text>}

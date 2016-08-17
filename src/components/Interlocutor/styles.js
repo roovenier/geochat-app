@@ -15,7 +15,8 @@ const styles = {
 	},
 	title: {
 		marginBottom: 3,
-		fontSize: 12
+		fontSize: 12,
+		color: '#000'
 	},
 	name: {
 		backgroundColor: '#000'

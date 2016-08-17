@@ -13,14 +13,16 @@ export default class DialogForm extends Component {
 	render() {
 		return (
 			<View style={styles.form}>
-				<TextInput
-					multiline={true}
-					placeholder={'Type something...'}
-					value={this.state.message}
-					ref="input"
-					style={styles.input}
-					onChangeText={message => this.setState({message})}
-				/>
+				<View style={styles.inputWrap}>
+					<TextInput
+						multiline={true}
+						placeholder={'Type something...'}
+						value={this.state.message}
+						ref="input"
+						style={styles.input}
+						onChangeText={message => this.setState({message})}
+					/>
+				</View>
 
 				<TouchableHighlight
 					style={styles.button}

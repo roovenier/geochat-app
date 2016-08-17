@@ -1,6 +1,6 @@
 const styles = {
 	profile: {
-		marginTop: 85,
+		marginTop: 20,
 		marginBottom: 25,
 		marginLeft: 15,
 		marginRight: 15,
@@ -15,7 +15,8 @@ const styles = {
 	},
 	hello: {
 		marginBottom: 8,
-		fontSize: 13
+		fontSize: 13,
+		color: '#000'
 	},
 	name: {
 		backgroundColor: '#000'

@@ -8,7 +8,8 @@ const styles = {
 	title: {
 		marginBottom: 10,
 		fontSize: 14,
-		textAlign: 'center'
+		textAlign: 'center',
+		color: '#000'
 	},
 	nobody: {
 		fontSize: 12,

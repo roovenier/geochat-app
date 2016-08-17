@@ -21,9 +21,9 @@ class Index extends Component {
 
 	openDialog(id) {
 		this.props.navigator.push({
-			title: 'Dialog',
+			name: 'Dialog',
 			component: Dialog,
-			passProps: {interlocutorId: id}
+			interlocutorId: id
 		});
 	}
 }

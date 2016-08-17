@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavigatorIOS } from 'react-native';
+import { Navigator, BackAndroid } from 'react-native';
 
 import csscolors from '../colors.json';
 import { getCoords, pickRandomProperty, capitalizeFirstLetter } from '../helpers';
@@ -10,6 +10,7 @@ import { addNotification } from '../actions/notifications';
 import { setSocket } from '../actions/socket';
 
 import Index from './Index';
+import Dialog from './Dialog';
 import Loading from '../components/Loading/Loading';
 
 class App extends Component {
@@ -53,12 +54,23 @@ class App extends Component {
 			})
 		, getCoords])
 			.then(values => {
+				values[1] = {latitude: 56.761757, longitude: 54.150153};
 				this.socket.emit('setting client metadata', {colors: values[0], coords: values[1]});
 			})
 			.catch(error => {
 				const e = error.message || error;
 				alert(e);
 			});
+
+		BackAndroid.addEventListener('hardwareBackPress', () => {
+			this.socket.emit('disconnect');
+			if (this._navigator && this._navigator.getCurrentRoutes().length > 1) {
+				this._navigator.pop();
+				return true;
+			}
+			this.socket.disconnect();
+			return false;
+		});
 	}
 
 	render() {
@@ -66,16 +78,32 @@ class App extends Component {
 
 		if(clientMe.coords && clientMe.colors && Object.keys(this.props.socket).length !== 0) {
 			return (
-				<NavigatorIOS
-					initialRoute={{
-						title: 'Geochat',
-						component: Index
+				<Navigator
+					initialRoute={{name: 'Index'}}
+					renderScene={(route, navigator) => this.renderScene(route, navigator)}
+					configureScene={route => {
+						if (route.sceneConfig) {
+							return route.sceneConfig;
+						}
+						return Navigator.SceneConfigs.FadeAndroid;
 					}}
-					style={{flex: 1}}
 				/>
 			);
 		} else {
 			return <Loading />;
+		}
+	}
+
+	renderScene(route, navigator) {
+		this._navigator = navigator;
+
+		switch(route.name) {
+			case 'Index':
+				return <Index navigator={navigator} />;
+			case 'Dialog':
+				return <Dialog navigator={navigator} interlocutorId={route.interlocutorId} />;
+			default:
+				return <Index navigator={navigator} />;
 		}
 	}
 }
