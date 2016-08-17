@@ -12,6 +12,7 @@ import { setSocket } from '../actions/socket';
 import Index from './Index';
 import Dialog from './Dialog';
 import Loading from '../components/Loading/Loading';
+import NavigationBar from '../components/NavigationBar/NavigationBar';
 
 class App extends Component {
 	constructor(props) {
@@ -78,7 +79,7 @@ class App extends Component {
 		if(clientMe.coords && clientMe.colors && Object.keys(this.props.socket).length !== 0) {
 			return (
 				<Navigator
-					initialRoute={{name: 'Index'}}
+					initialRoute={{name: 'Geochat'}}
 					renderScene={(route, navigator) => this.renderScene(route, navigator)}
 					configureScene={route => {
 						if (route.sceneConfig) {
@@ -86,6 +87,18 @@ class App extends Component {
 						}
 						return Navigator.SceneConfigs.FadeAndroid;
 					}}
+					navigationBar={
+						<Navigator.NavigationBar
+							routeMapper={{
+								LeftButton: (route, navigator, index, navState) => null,
+								RightButton: (route, navigator, index, navState) => null,
+								Title: (route, navigator, index, navState) => {
+									return <NavigationBar title={route.name} />;
+								}
+							}}
+							style={{backgroundColor: '#eee'}}
+						/>
+					}
 				/>
 			);
 		} else {
@@ -97,7 +110,7 @@ class App extends Component {
 		this._navigator = navigator;
 
 		switch(route.name) {
-			case 'Index':
+			case 'Geochat':
 				return <Index navigator={navigator} />;
 			case 'Dialog':
 				return <Dialog navigator={navigator} interlocutorId={route.interlocutorId} />;

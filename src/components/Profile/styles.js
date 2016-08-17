@@ -1,6 +1,6 @@
 const styles = {
 	profile: {
-		marginTop: 20,
+		marginTop: 80,
 		marginBottom: 25,
 		marginLeft: 15,
 		marginRight: 15,
