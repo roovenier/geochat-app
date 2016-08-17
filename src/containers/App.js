@@ -54,7 +54,6 @@ class App extends Component {
 			})
 		, getCoords])
 			.then(values => {
-				values[1] = {latitude: 56.761757, longitude: 54.150153};
 				this.socket.emit('setting client metadata', {colors: values[0], coords: values[1]});
 			})
 			.catch(error => {
